@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <div>
     <h1> When there is no desire, all things are at peace. - Laozi </h1>
     <h3>Add a Post</h3>
@@ -15,3 +17,4 @@
         <button type="submit">Create Post</button>
     </form>
 </div>
+@endsection

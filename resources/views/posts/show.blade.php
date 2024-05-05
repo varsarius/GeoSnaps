@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <div>
     <h1>Walk as if you are kissing the Earth with your feet. - Thich Nhat Hanh </h1>
     <ul>
@@ -20,3 +22,4 @@
     </ul>
     <br>
 </div>
+@endsection

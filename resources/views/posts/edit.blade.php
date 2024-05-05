@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <div>
     <h1>The only way to do great work is to love what you do. - Steve Jobs </h1>
     <h3>Edit a Post</h3>
@@ -16,3 +18,4 @@
         <button type="submit">Update Post</button>
     </form>
 </div>
+@endsection

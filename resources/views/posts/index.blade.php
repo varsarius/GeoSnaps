@@ -1,3 +1,5 @@
+@extends('layouts.default')
+@section('content')
 <div>
     <h1>The biggest battle is the war against ignorance. - Mustafa Kemal Atatürk </h1>
     <a href="{{ route('posts.create') }}">Create</a>
@@ -26,3 +28,4 @@
         <br>
     @endforeach
 </div>
+@endsection
