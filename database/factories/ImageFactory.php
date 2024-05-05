@@ -19,7 +19,7 @@ class ImageFactory extends Factory
     {
         return [
             'image_url' => $this->faker->imageUrl(),
-            'post_id' => Post::factory(), // Создаем новый пост для каждого изображения
+            'post_id' => Post::get()->random()->id, // Создаем новый пост для каждого изображения
         ];
     }
 }
