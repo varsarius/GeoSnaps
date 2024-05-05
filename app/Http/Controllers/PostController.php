@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : view
     {
         $posts = Post::all();
         return view('posts.index', compact('posts'));
@@ -20,7 +23,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() : view
     {
         return view('posts.create');
     }
@@ -28,7 +31,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request) : RedirectResponse
     {
         Post::create($request->all());
         return redirect()->route('posts.index');//->with('success', 'Post created successfully.');
@@ -37,7 +40,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post) : view
     {
         return view('posts.show', compact('post'));
     }
@@ -45,7 +48,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Post $post) : view
     {
         return view('posts.edit', compact('post'));
     }
@@ -53,7 +56,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post) : RedirectResponse
     {
         $post->update($request->all());
         return redirect()->route('posts.index');//->with('success', 'Post updated successfully.');
@@ -62,7 +65,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post) : RedirectResponse
     {
         $post->delete();
         return redirect()->route('posts.index');//->with('success', 'Post deleted successfully');
