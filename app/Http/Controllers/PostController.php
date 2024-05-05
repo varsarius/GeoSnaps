@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index() : view
     {
-        $posts = Post::all();
+        $posts = Post::with('images')->get();
         return view('posts.index', compact('posts'));
     }
 
