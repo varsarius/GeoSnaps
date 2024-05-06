@@ -35,16 +35,7 @@
                     }
                     img.style.marginLeft = "2rem";
                     img.style.marginBottom = "2rem";
-                    var removeButton = document.createElement('button');
-                    removeButton.textContent = 'X';
-                    removeButton.style.position = 'absolute';
-                    removeButton.style.opacity = '0.5';
-                    removeButton.addEventListener('click', function(e) {
-                        fileList.removeChild(img);
-                        fileList.removeChild(removeButton);
-                    });
                     fileList.appendChild(img);
-                    fileList.appendChild(removeButton);
                 })(files[i]);
             }
         });
