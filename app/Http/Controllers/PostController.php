@@ -33,6 +33,10 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
+        if($request->hasFile('images')) {
+            $files = $request->file('images'); // получить все загруженные файлы
+            dd($files); // дамп всех файлов
+        }
         Post::create($request->all());
         return redirect()->route('posts.index');//->with('success', 'Post created successfully.');
     }

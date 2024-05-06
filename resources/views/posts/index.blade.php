@@ -2,7 +2,6 @@
 @section('content')
 <div>
     <h1>The biggest battle is the war against ignorance. - Mustafa Kemal Atatürk </h1>
-    <a href="{{ route('posts.create') }}">Create</a>
     <div class="container mx-auto mt-4">
         <div class="row">
             @foreach($posts as $post)
@@ -50,7 +49,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{$post->name}}</h5>
-                            <p class="card-text">{{$post->description}}</p>
+                            <p class="card-text"><pre style="white-space: pre-wrap;">{{ $post->description }}</pre></p>
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mr-2"><i class="fas fa-link"></i> Edit</a>
                             <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> Show</a>
                             <form style="float: right" action="{{ route('posts.destroy', $post->id) }}" method="post">

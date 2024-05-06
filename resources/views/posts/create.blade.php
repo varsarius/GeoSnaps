@@ -1,20 +1,52 @@
 @extends('layouts.default')
 @section('content')
-<div>
-    <h1> When there is no desire, all things are at peace. - Laozi </h1>
-    <h3>Add a Post</h3>
-    <form action="{{ route('posts.store') }}" method="post">
+    <form id="uploadForm" action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name the post" required>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="3" required></textarea>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" name="description" rows="3" required></textarea>
+        </div>
+        <div>
+            <label for="formFileLg" class="form-label">Large file input example</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file" name="images[]" multiple="">
         </div>
         <br>
-        <button type="submit">Create Post</button>
+        <button type="submit" class="btn btn-primary">Create Post</button>
     </form>
-</div>
+    <br>
+    <div id="fileList"></div>
+
+    <script>
+        document.getElementById('formFileLg').addEventListener('change', function(e) {
+            var fileList = document.getElementById('fileList');
+            fileList.innerHTML = ''; // очистить список перед добавлением новых файлов
+            var files = this.files;
+            for (var i = 0; i < files.length; i++) {
+                (function(file) {
+                    var img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.height = 100; // измените размер по своему усмотрению
+                    img.onload = function() {
+                        URL.revokeObjectURL(this.src); // освобождение ресурсов после загрузки изображения
+                    }
+                    img.style.marginLeft = "2rem";
+                    img.style.marginBottom = "2rem";
+                    var removeButton = document.createElement('button');
+                    removeButton.textContent = 'X';
+                    removeButton.style.position = 'absolute';
+                    removeButton.style.opacity = '0.5';
+                    removeButton.addEventListener('click', function(e) {
+                        fileList.removeChild(img);
+                        fileList.removeChild(removeButton);
+                    });
+                    fileList.appendChild(img);
+                    fileList.appendChild(removeButton);
+                })(files[i]);
+            }
+        });
+    </script>
 @endsection
