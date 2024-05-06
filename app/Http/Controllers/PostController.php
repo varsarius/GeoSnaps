@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -33,11 +34,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
-        if($request->hasFile('images')) {
-            $files = $request->file('images'); // получить все загруженные файлы
-            dd($files); // дамп всех файлов
+        $post = Post::create($request->all());
+        $files = $request->file('images'); // получить все загруженные файлы
+
+        foreach ($files as $file){
+            $fileName = $file->getClientOriginalName();
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $image = new Image;
+            $image->image_url = 'images/'.uniqid('', true).'.'.$fileActualExt;
+            $image->post_id = $post->id;
+            move_uploaded_file($file->getPathName(), $image->image_url);
+            $image->save();
         }
-        Post::create($request->all());
+
+
         return redirect()->route('posts.index');//->with('success', 'Post created successfully.');
     }
 

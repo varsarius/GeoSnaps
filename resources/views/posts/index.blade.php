@@ -1,5 +1,13 @@
 @extends('layouts.default')
 @section('content')
+    <style>
+        .carousel-item img {
+            height: 300px; /* Задайте высоту, которую вы хотите */
+            width: 100%; /* Это убедится, что изображение всегда занимает 100% ширины своего контейнера *!*/
+            object-fit: contain; /* Это убедится, что изображение всегда будет заполнять контейнер, сохраняя при этом свои пропорции */
+        }
+
+    </style>
 <div>
     <h1>The biggest battle is the war against ignorance. - Mustafa Kemal Atatürk </h1>
     <div class="container mx-auto mt-4">
