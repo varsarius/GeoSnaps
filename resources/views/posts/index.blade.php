@@ -46,9 +46,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div>
-                                {{$post->latitude}} <br> {{$post->longitude}}
-                            </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{$post->id}}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
@@ -60,7 +57,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{$post->name}}</h5>
-                            <a href="#" class="btn btn-primary btn-square float-end" style="width: 30px;
+                            <a href="{{ route('map', $post->id) }}" class="btn btn-primary btn-square float-end" style="width: 30px;
   height: 30px;
   padding: 0;">
                                 <i class="bi bi-geo-alt-fill"></i>

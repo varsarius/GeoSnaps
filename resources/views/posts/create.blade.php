@@ -16,7 +16,13 @@
             });
 
             // Добавляем маркер по умолчанию (синий маркер)
-            defaultMarker = new ymaps.Placemark(moldovaCenter, {}, {
+            defaultMarker = new ymaps.Placemark(moldovaCenter, {
+                iconContent: '<i class="fa-3x bi-lg bi bi-person-circle"></i>', // Текст, который будет отображаться над маркером
+                balloonContentHeader: 'A long time ago',
+                balloonContentBody: 'In a galaxy',
+                balloonContentFooter: 'Far, Far Away...',
+                hintContent: 'Укажи координаты.'
+            }, {
                 draggable: true // разрешаем перемещение маркера
             });
             map.geoObjects.add(defaultMarker); // добавляем маркер на карту
@@ -28,6 +34,28 @@
                 console.log('Новые координаты: ' + coords[0] + ', ' + coords[1]);
                 document.getElementById('lat').setAttribute('value', coords[0]);
                 document.getElementById('lng').setAttribute('value', coords[1]);
+            });
+
+            // Создаем маркеры и устанавливаем для каждого информационное окно
+            var locations = [
+                @foreach($posts as $post)
+                    {
+                        lat: {{$post->latitude}},
+                        lng: {{$post->longitude}},
+                        link: '{{ route('posts.show', $post->id) }}',
+                        imgUrl: '{{ asset($post->images->first()->image_url)}}',
+                    },
+                @endforeach
+            ];
+
+            locations.forEach(function(location) {
+                var position = [location.lat, location.lng];
+                var marker = addMarker(position, location.link, location.imgUrl);
+
+                // Добавляем обработчик клика на маркер, чтобы открыть информационное окно при щелчке
+                //marker.events.add('click', function() {
+                //    window.location.href = location.link; // переход по ссылке
+                //});
             });
 
             // Создаем кнопку "Показать мое местоположение"
@@ -44,13 +72,12 @@
             // Добавляем обработчик клика на кнопку
             MyLocationButton.events.add('click', function () {
                 if (navigator.geolocation) {
-                    console.log(navigator.geolocation);
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var pos = [position.coords.latitude, position.coords.longitude];
                         defaultMarker.geometry.setCoordinates(pos); // перемещаем маркер по умолчанию
                         map.setCenter(pos); // центрируем карту на местоположении пользователя
                     }, function() {
-                        alert('Ошибка: Не удалось получить ваше местоположение.');
+                        alert('Ошибка: Не удалось получить ваше местоположение.'); //c http будет всегда это. нужен https.
                     });
                 } else {
                     // Браузер не поддерживает геолокацию
@@ -61,6 +88,22 @@
             // Добавляем кнопку на карту
             map.controls.add(MyLocationButton);
 
+        }
+
+        // Функция для добавления маркера на карту
+        function addMarker(position, link, imgUrl) {
+            var marker = new ymaps.Placemark(position, {
+                iconContent: '<img width="50" height="50" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
+                balloonContentHeader: 'A long time ago',
+                balloonContentBody: 'In a galaxy',
+                balloonContentFooter: 'Far, Far Away...'+link,
+                hintContent: 'May the Force be with you!'
+            });
+
+            map.geoObjects.add(marker); // добавляем маркер на карту
+            markers.push(marker); // добавляем маркер в массив
+
+            return marker;
         }
     </script>
 
@@ -81,7 +124,7 @@
         </div>
         <br>
         <br>
-        <div id="map" style="height: 30vh; width: 60vw;">5</div>
+        <div id="map" style="height: 30vh; width: 60vw;"></div>
         <input type="hidden" name="latitude" id="lat"/>
         <input type="hidden" name="longitude" id="lng"/>
         <br>

@@ -26,7 +26,8 @@ class PostController extends Controller
      */
     public function create() : view
     {
-        return view('posts.create');
+        $posts = Post::with('images')->get();
+        return view('posts.create', compact('posts'));
     }
 
     /**
@@ -36,6 +37,7 @@ class PostController extends Controller
     {
         $post = Post::create($request->all());
         $files = $request->file('images'); // получить все загруженные файлы
+
 
         foreach ($files as $file){
             $fileName = $file->getClientOriginalName();
@@ -107,9 +109,9 @@ class PostController extends Controller
         return redirect()->back();//->with('success', 'Post deleted successfully');
     }
 
-    public function map() : view
+    public function map($id = -1) : view
     {
         $posts = Post::all();
-        return view('map', compact('posts'));
+        return view('map', compact('posts', 'id'));
     }
 }
