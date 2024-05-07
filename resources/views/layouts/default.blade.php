@@ -15,6 +15,7 @@
 <body id="body">
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <h1>{{ __('messages.welcome') }}</h1>
         <a href="{{route('main')}}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
             <img src="{{asset('favicon.png')}}" width="128px" alt="to main">
         </a>
