@@ -73,6 +73,21 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post) : RedirectResponse
     {
+
+        $files = $request->file('images'); // получить все загруженные файлы
+        //dd($files);
+
+        foreach ($files as $file){
+            $fileName = $file->getClientOriginalName();
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+            $image = new Image;
+            $image->image_url = 'images/'.uniqid('', true).'.'.$fileActualExt;
+            $image->post_id = $post->id;
+            move_uploaded_file($file->getPathName(), $image->image_url);
+            $image->save();
+        }
+
         $post->update($request->all());
         return redirect()->route('posts.index');//->with('success', 'Post updated successfully.');
     }
@@ -84,5 +99,17 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('posts.index');//->with('success', 'Post deleted successfully');
+    }
+
+    public function destroy_image(Image $image) : RedirectResponse
+    {
+        $image->delete();
+        return redirect()->back();//->with('success', 'Post deleted successfully');
+    }
+
+    public function map() : view
+    {
+        $posts = Post::all();
+        return view('map', compact('posts'));
     }
 }

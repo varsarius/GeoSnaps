@@ -19,6 +19,8 @@ class PostFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
+            'latitude' => fake()->latitude,
+            'longitude' => fake()->longitude,
         ];
     }
 }

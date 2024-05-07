@@ -6,10 +6,11 @@
 
     <title>{{ config('app.name', 'GeoSnaps') }}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
-<body data-bs-theme="dark">
+<body id="body">
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
@@ -25,7 +26,14 @@
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
 
-        <div class="col-md-3 text-end">
+        <div onclick="SwitchkMode()" class="col-md-1 form-check form-switch">
+            <label onclick="SwitchkMode()" class="form-check-label" for="lightSwitch"> Dark Mode </label>
+            <input class="form-check-input" type="checkbox" id="lightSwitch" />
+        </div>
+
+
+
+        <div class="col-md-2 text-end">
             <button type="button" class="btn btn-outline-primary me-2">Login</button>
             <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
@@ -50,5 +58,14 @@
         </footer>
     </div>
 </div>
+<script>
+    function SwitchkMode() {
+        if(document.getElementsByTagName('html')[0].getAttribute('data-bs-theme') === 'dark')
+            document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'light');
+        else {
+            document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', 'dark');
+        }
+    }
+</script>
 </body>
 </html>
