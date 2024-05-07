@@ -60,6 +60,12 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{$post->name}}</h5>
+                            <a href="#" class="btn btn-primary btn-square float-end" style="width: 30px;
+  height: 30px;
+  padding: 0;">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span class="visually-hidden">Показать на карте</span>
+                            </a>
                             <p class="card-text"><pre style="white-space: pre-wrap;">{{ $post->description }}</pre></p>
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mr-2"><i class="fas fa-link"></i> Edit</a>
                             <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> Show</a>

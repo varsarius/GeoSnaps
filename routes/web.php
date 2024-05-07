@@ -7,8 +7,9 @@ use App\Http\Controllers\PostController;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('main');
+})->name('main');
+
 Route::get('/map', [PostController::class, 'map'])->name('map');
 
 Route::delete('/images/{image}', [PostController::class, 'destroy_image'])->name('images.destroy');

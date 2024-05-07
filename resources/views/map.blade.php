@@ -21,7 +21,13 @@
             });
 
             // Добавляем маркер по умолчанию (синий маркер)
-            defaultMarker = new ymaps.Placemark(moldovaCenter, {}, {
+            defaultMarker = new ymaps.Placemark(moldovaCenter, {
+                iconContent: 'ПОСТАВЬ МЕНЯ НА МЕСТО??', // Текст, который будет отображаться над маркером
+                balloonContentHeader: 'A long time ago',
+                balloonContentBody: 'In a galaxy',
+                balloonContentFooter: 'Far, Far Away...',
+                hintContent: 'May the Force be with you!'
+            }, {
                 draggable: true // разрешаем перемещение маркера
             });
             map.geoObjects.add(defaultMarker); // добавляем маркер на карту
