@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index() : view
     {
-        $posts = Post::with('images')->get();
+        $posts = Post::with('images')->paginate(30);
         return view('posts.index', compact('posts'));
     }
 
@@ -36,7 +36,15 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
+        if (empty($_POST)) {
+            return redirect()->back()->withErrors(['file_error' => 'Размер загружаемых файлов превышает допустимый лимит.']);
+        }
+
+
+
         $post = Post::create($request->all());
+
+
         $files = $request->file('images'); // получить все загруженные файлы
 
 
@@ -76,22 +84,40 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post) : RedirectResponse
     {
-
         $files = $request->file('images'); // получить все загруженные файлы
-        //dd($files);
+        if (isset($files)) {
 
-        foreach ($files as $file){
-            $fileName = $file->getClientOriginalName();
-            $fileExt = explode('.', $fileName);
-            $fileActualExt = strtolower(end($fileExt));
-            $image = new Image;
-            $image->image_url = 'images/'.uniqid('', true).'.'.$fileActualExt;
-            $image->post_id = $post->id;
-            move_uploaded_file($file->getPathName(), $image->image_url);
-            $image->save();
+            //dd($files);
+
+            foreach ($files as $file) {
+                $fileName = $file->getClientOriginalName();
+                $fileExt = explode('.', $fileName);
+                $fileActualExt = strtolower(end($fileExt));
+
+                $image = new Image;
+                $image->image_url = 'images/' . uniqid('', true) . '.' . $fileActualExt;
+                $image->post_id = $post->id;
+                move_uploaded_file($file->getPathName(), $image->image_url);
+                $image->save();
+            }
         }
 
-        $post->update($request->all());
+        $data = $request->except('latitude', 'longitude');
+
+        if ($request->latitude != '') {
+            $data['latitude'] = $request->latitude;
+        } else {
+            $data['latitude'] = $post->latitude;
+        }
+
+        if ($request->longitude != '') {
+            $data['longitude'] = $request->longitude;
+        } else {
+            $data['longitude'] = $post->longitude;
+        }
+
+        $post->update($data);
+
         return redirect()->route('posts.index');//->with('success', 'Post updated successfully.');
     }
 

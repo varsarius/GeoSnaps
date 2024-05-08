@@ -15,7 +15,7 @@
                 @if($id != -1)
                     center: @foreach($posts as $post)
 
-                        @if($post->id == $id) [ {{$post->latitude}}, {{$post->longitude}} ],  @endif
+                        @if(($post->id == $id)&&(isset($post->latitude))) [ {{$post->latitude}}, {{$post->longitude}} ],  @endif
                     @endforeach
                 @else
                     center: moldovaCenter,
@@ -26,6 +26,7 @@
             // Создаем маркеры и устанавливаем для каждого информационное окно
             var locations = [
                 @foreach($posts as $post)
+                    @if(isset($post->latitude))
                     {
                         lat: {{$post->latitude}},
                         lng: {{$post->longitude}},
@@ -34,6 +35,7 @@
                         x: @if($post->id == $id) 100 @else 50 @endif,
                         y: @if($post->id == $id) 100 @else 50 @endif,
                     },
+                    @endif
                 @endforeach
             ];
 

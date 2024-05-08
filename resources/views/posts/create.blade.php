@@ -3,17 +3,20 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU" type="text/javascript"></script>
     <script>
         var moldovaCenter = [47.02551261915755, 28.83032397617856]; // Начальные координаты для Молдовы
-        var coords = moldovaCenter;
+        var coords = moldovaCenter
+        @if(null !== old('latitude'))coords =  [ {{ old('latitude') }} , {{ old('longitude') }}]; @endif
         var map;
         var markers = []; // массив для хранения маркеров
         var defaultMarker; // маркер по умолчанию
+
+        var cord_def = coords;
 
         ymaps.ready(initMap);
 
         function initMap() {
 
             map = new ymaps.Map('map', {
-                center: moldovaCenter,
+                center: coords,
                 zoom: 12
             });
 
@@ -71,7 +74,7 @@
             // Добавляем кнопку на карту
             map.controls.add(MyLocationButton);
             // Добавляем маркер по умолчанию (синий маркер)
-            defaultMarker = new ymaps.Placemark(moldovaCenter, {
+            defaultMarker = new ymaps.Placemark(cord_def, {
                 iconContent: '<i class="fa-3x bi-lg bi bi-person-circle"></i>', // Текст, который будет отображаться над маркером
                 balloonContentHeader: 'A long time ago',
                 balloonContentBody: 'In a galaxy',
@@ -112,16 +115,24 @@
         }
     </script>
 
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    @if($error!=='') <li>{{ $error }}</li>@endif
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form id="uploadForm" action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name the post" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name the post"  value="{{ old('name') }}" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" class="form-control" name="description" rows="3" required></textarea>
+            <textarea id="description" class="form-control" name="description" rows="3"> {{ old('description') }} </textarea>
         </div>
         <div>
             <label for="formFileLg" class="form-label">Large file input example</label>
@@ -131,12 +142,12 @@
         <br>
 
         <label class="form-check-label col-md-7" for="openMap">
-        <div class="col-md-7 form-check form-switch" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-             Показать на карте координаты
-            <input class="form-check-input" type="checkbox" id="openMap" />
+        <div class="col-md-7 form-check form-switch {{ old('tt') ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="{{ old('tt') ? 'true' : 'false' }}" aria-controls="collapseExample">
+             <div>Показать на карте координаты</div>
+            <input class="form-check-input" type="checkbox" id="openMap" name="tt" {{ old('tt') ? 'checked' : '' }} />
         </div>
         </label>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse {{ old('tt') ? 'show' : '' }}" id="collapseExample">
                 <div class="card card-body" id="map" style="height: 40vh; width: 70vw;"></div>
         </div>
 
@@ -172,7 +183,7 @@
         });
 
         document.getElementById('openMap').addEventListener('change', function(e) {
-            if (this.checked == false) {
+            if (this.checked === false) {
                 document.getElementById('lat').setAttribute('value', null);
                 document.getElementById('lng').setAttribute('value', null);
             } else {

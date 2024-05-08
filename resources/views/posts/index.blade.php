@@ -63,7 +63,11 @@
                                 <i class="bi bi-geo-alt-fill"></i>
                                 <span class="visually-hidden">Показать на карте</span>
                             </a>
-                            <p class="card-text"><pre style="white-space: pre-wrap;">{{ $post->description }}</pre></p>
+                            <p class="card-text"><pre style="white-space: pre-wrap;     display: -webkit-box;
+    -webkit-line-clamp: 13; /* количество отображаемых строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;">{{ $post->description }}</pre></p>
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mr-2"><i class="fas fa-link"></i> Edit</a>
                             <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> Show</a>
                             <form style="float: right" action="{{ route('posts.destroy', $post->id) }}" method="post">
@@ -77,6 +81,7 @@
 
             @endforeach
         </div>
+        {{ $posts->links() }}
     </div>
 </div>
 @endsection

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->text("description");
+            $table->text("description")->nullable();
             $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);
             $table->timestamps();

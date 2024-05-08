@@ -22,10 +22,24 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
+            'name' => ['required', 'max:255'],
+            'description' => 'nullable',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'images' => 'required',
+            'images.*' => ['image', 'max:8192'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Пожалуйста, назовите свою публикацию.',
+            'latitude.required' => 'Пожалуйста, укажите координаты местности.',
+            'longitude.required' => '',
+            'images.required' => 'Пожалуйста, загрузите хотя бы одно изображение.',
+            'images.*.image' => 'Все загруженные файлы должны быть изображениями.',
+            'images.*.max' => 'Максимальный размер файла - 8 МБ.',
         ];
     }
 }
