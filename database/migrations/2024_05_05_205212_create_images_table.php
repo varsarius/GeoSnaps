@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('image_url');
-            $table->unsignedBigInteger('post_id');
+            //$table->unsignedBigInteger('post_id');
+            $table->foreignIdFor(\App\Models\Post::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
-            $table->foreign('post_id')
-            ->references('id')
-                ->on('posts')
-                ->onDelete('cascade');
+
+            $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
     }
 

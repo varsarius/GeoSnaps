@@ -10,6 +10,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script>
         document.getElementsByTagName('html')[0].setAttribute('data-bs-theme', localStorage.getItem("theme"));
+
     </script>
 </head>
 <body id="body">
@@ -30,10 +31,11 @@
             <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
 
-        <div onclick="aSwitchMode()" class="col-md-1 form-check form-switch">
-            <label onclick="aSwitchMode()" class="form-check-label" for="lightSwitch"> Dark Mode </label>
-            <input class="form-check-input" type="checkbox" id="lightSwitch" />
-        </div>
+        <label class="form-check-label" for="lightSwitch"> Dark Mode
+            <div class="col-md-1 form-check form-switch">
+                <input onchange="aSwitchMode()" class="form-check-input" type="checkbox" id="lightSwitch" />
+            </div>
+        </label>
     </header>
 
     @yield('content')
@@ -57,6 +59,9 @@
 </div>
 <script>
 
+
+
+    document.getElementById('lightSwitch').checked = (localStorage.getItem("theme") === 'dark');
 
     function aSwitchMode() {
         if (document.getElementsByTagName('html')[0].getAttribute('data-bs-theme') === 'dark'){

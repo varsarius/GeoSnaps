@@ -2,6 +2,8 @@
 @section('content')
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU" type="text/javascript"></script>
     <script>
+        var moldovaCenter = [47.02551261915755, 28.83032397617856]; // Начальные координаты для Молдовы
+        var coords = moldovaCenter;
         var map;
         var markers = []; // массив для хранения маркеров
         var defaultMarker; // маркер по умолчанию
@@ -9,32 +11,13 @@
         ymaps.ready(initMap);
 
         function initMap() {
-            var moldovaCenter = [47.4116, 28.3699]; // Начальные координаты для Молдовы
+
             map = new ymaps.Map('map', {
                 center: moldovaCenter,
-                zoom: 6
+                zoom: 12
             });
 
-            // Добавляем маркер по умолчанию (синий маркер)
-            defaultMarker = new ymaps.Placemark(moldovaCenter, {
-                iconContent: '<i class="fa-3x bi-lg bi bi-person-circle"></i>', // Текст, который будет отображаться над маркером
-                balloonContentHeader: 'A long time ago',
-                balloonContentBody: 'In a galaxy',
-                balloonContentFooter: 'Far, Far Away...',
-                hintContent: 'Укажи координаты.'
-            }, {
-                draggable: true // разрешаем перемещение маркера
-            });
-            map.geoObjects.add(defaultMarker); // добавляем маркер на карту
-            markers.push(defaultMarker); // добавляем маркер в массив
 
-            // Добавляем обработчик завершения перемещения маркера
-            defaultMarker.events.add('dragend', function(event) {
-                var coords = event.get('target').geometry.getCoordinates();
-                console.log('Новые координаты: ' + coords[0] + ', ' + coords[1]);
-                document.getElementById('lat').setAttribute('value', coords[0]);
-                document.getElementById('lng').setAttribute('value', coords[1]);
-            });
 
             // Создаем маркеры и устанавливаем для каждого информационное окно
             var locations = [
@@ -87,13 +70,35 @@
 
             // Добавляем кнопку на карту
             map.controls.add(MyLocationButton);
+            // Добавляем маркер по умолчанию (синий маркер)
+            defaultMarker = new ymaps.Placemark(moldovaCenter, {
+                iconContent: '<i class="fa-3x bi-lg bi bi-person-circle"></i>', // Текст, который будет отображаться над маркером
+                balloonContentHeader: 'A long time ago',
+                balloonContentBody: 'In a galaxy',
+                balloonContentFooter: 'Far, Far Away...',
+                hintContent: 'Укажи координаты.'
+            }, {
+                draggable: true, // разрешаем перемещение маркера
+                zIndex: 10000,
+                iconColor: 'blue',
+                useMapMarginInDragging: true,
+            });
+            map.geoObjects.add(defaultMarker); // добавляем маркер на карту
+            markers.push(defaultMarker); // добавляем маркер в массив
 
+            // Добавляем обработчик завершения перемещения маркера
+            defaultMarker.events.add('dragend', function(event) {
+                coords = event.get('target').geometry.getCoordinates();
+                console.log('Новые координаты: ' + coords[0] + ', ' + coords[1]);
+                document.getElementById('lat').setAttribute('value', coords[0]);
+                document.getElementById('lng').setAttribute('value', coords[1]);
+            });
         }
 
         // Функция для добавления маркера на карту
         function addMarker(position, link, imgUrl) {
             var marker = new ymaps.Placemark(position, {
-                iconContent: '<img width="50" height="50" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
+                iconContent: '<img style="margin-left: -20px; margin-top: -80px" width="50" height="50" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
                 balloonContentHeader: 'A long time ago',
                 balloonContentBody: 'In a galaxy',
                 balloonContentFooter: 'Far, Far Away...'+link,
@@ -124,7 +129,19 @@
         </div>
         <br>
         <br>
-        <div id="map" style="height: 30vh; width: 60vw;"></div>
+
+        <label class="form-check-label col-md-7" for="openMap">
+        <div class="col-md-7 form-check form-switch" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+             Показать на карте координаты
+            <input class="form-check-input" type="checkbox" id="openMap" />
+        </div>
+        </label>
+        <div class="collapse" id="collapseExample">
+                <div class="card card-body" id="map" style="height: 40vh; width: 70vw;"></div>
+        </div>
+
+
+
         <input type="hidden" name="latitude" id="lat"/>
         <input type="hidden" name="longitude" id="lng"/>
         <br>
@@ -152,6 +169,16 @@
                     fileList.appendChild(img);
                 })(files[i]);
             }
+        });
+
+        document.getElementById('openMap').addEventListener('change', function(e) {
+            if (this.checked == false) {
+                document.getElementById('lat').setAttribute('value', null);
+                document.getElementById('lng').setAttribute('value', null);
+            } else {
+                document.getElementById('lat').setAttribute('value', coords[0]);
+                document.getElementById('lng').setAttribute('value', coords[1]);
+            };
         });
     </script>
 @endsection

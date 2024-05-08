@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Моя Яндекс Карта</title>
-    <meta charset="utf-8">
+@extends('layouts.default')
+@section('content')
     <!-- Подключаем Bootstrap CSS -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU" type="text/javascript"></script>
     <script>
+        var moldovaCenter = [47.02551261915755, 28.83032397617856]; // Начальные координаты для Молдовы
         var map;
         var markers = []; // массив для хранения маркеров
         var defaultMarker; // маркер по умолчанию
@@ -13,34 +11,16 @@
         ymaps.ready(initMap);
 
         function initMap() {
-            var moldovaCenter = [47.4116, 28.3699]; // Начальные координаты для Молдовы
             map = new ymaps.Map('map', {
-                center: @foreach($posts as $post)
+                @if($id != -1)
+                    center: @foreach($posts as $post)
 
-                    @if($post->id == $id) [ {{$post->latitude}}, {{$post->longitude}} ],  @endif
-                @endforeach
-                zoom: 6
-            });
-
-            // Добавляем маркер по умолчанию (синий маркер)
-            defaultMarker = new ymaps.Placemark(moldovaCenter, {
-                iconContent: '<i class="fa-3x bi-lg bi bi-person-circle"></i>', // Текст, который будет отображаться над маркером
-                balloonContentHeader: 'A long time ago',
-                balloonContentBody: 'In a galaxy',
-                balloonContentFooter: 'Far, Far Away...',
-                hintContent: 'Укажи координаты.'
-            }, {
-                draggable: true // разрешаем перемещение маркера
-            });
-            map.geoObjects.add(defaultMarker); // добавляем маркер на карту
-            markers.push(defaultMarker); // добавляем маркер в массив
-
-            // Добавляем обработчик завершения перемещения маркера
-            defaultMarker.events.add('dragend', function(event) {
-                var coords = event.get('target').geometry.getCoordinates();
-                console.log('Новые координаты: ' + coords[0] + ', ' + coords[1]);
-                document.getElementById('lat').setAttribute('value', coords[0]);
-                document.getElementById('lng').setAttribute('value', coords[1]);
+                        @if($post->id == $id) [ {{$post->latitude}}, {{$post->longitude}} ],  @endif
+                    @endforeach
+                @else
+                    center: moldovaCenter,
+                @endif
+                zoom: 12
             });
 
             // Создаем маркеры и устанавливаем для каждого информационное окно
@@ -102,7 +82,7 @@
         // Функция для добавления маркера на карту
         function addMarker(position, link, imgUrl, x, y) {
             var marker = new ymaps.Placemark(position, {
-                iconContent: '<img width="'+x+'" height="'+y+'" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
+                iconContent: '<img style="margin-left: '+(-0.4*x)+'px; margin-top: '+(-1.8*y)+'px" width="'+x+'" height="'+y+'" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
                 balloonContentHeader: 'A long time ago',
                 balloonContentBody: 'In a galaxy',
                 balloonContentFooter: 'Far, Far Away...'+link,
@@ -115,8 +95,8 @@
             return marker;
         }
     </script>
-</head>
-<body>
-<div id="map" style="height: 100vh; width: 100vw;"></div>
-</body>
-</html>
+
+    <div class="justify-content-md-center">
+        <div id="map"  style="height: 50vh; width: 50vw;"></div>
+    </div>
+@endsection
