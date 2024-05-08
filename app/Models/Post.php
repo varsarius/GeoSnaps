@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 class Post extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes, CascadeSoftDeletes;
 
+    protected $cascadeDeletes = ['images'];
 
     protected $table = "posts";
     protected $fillable = [
@@ -23,7 +24,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->hasMany('App\Models\Image');
+        return $this->hasMany(Image::class);
     }
 
 
