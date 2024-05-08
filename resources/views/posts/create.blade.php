@@ -102,10 +102,6 @@
         function addMarker(position, link, imgUrl) {
             var marker = new ymaps.Placemark(position, {
                 iconContent: '<img style="margin-left: -20px; margin-top: -80px" width="50" height="50" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
-                balloonContentHeader: 'A long time ago',
-                balloonContentBody: 'In a galaxy',
-                balloonContentFooter: 'Far, Far Away...'+link,
-                hintContent: 'May the Force be with you!'
             });
 
             map.geoObjects.add(marker); // добавляем маркер на карту

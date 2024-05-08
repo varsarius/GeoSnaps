@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-    <!-- Подключаем Bootstrap CSS -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU" type="text/javascript"></script>
     <script>
         var moldovaCenter = [47.02551261915755, 28.83032397617856]; // Начальные координаты для Молдовы
@@ -85,9 +84,9 @@
         function addMarker(position, link, imgUrl, x, y) {
             var marker = new ymaps.Placemark(position, {
                 iconContent: '<img style="margin-left: '+(-0.4*x)+'px; margin-top: '+(-1.8*y)+'px" width="'+x+'" height="'+y+'" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
-                balloonContentHeader: 'A long time ago',
-                balloonContentBody: 'In a galaxy',
-                balloonContentFooter: 'Far, Far Away...'+link,
+                balloonContentHeader: 'Интересное место',
+                balloonContentBody: 'Хочешь...',
+                balloonContentFooter: '<a href="'+link+'"> Посмотреть..? </a>',
                 hintContent: 'May the Force be with you!'
             });
 
