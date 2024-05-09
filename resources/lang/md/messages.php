@@ -54,4 +54,5 @@ return [
     'cta_join_now' => 'Alătură-te GeoSnaps',
 
     'post_idx' => 'Toate posturi sunt aici',
+    '404' => '404 | NU E GĂSIT',
 ];

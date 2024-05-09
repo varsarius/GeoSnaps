@@ -11,7 +11,7 @@ return [
     'Password' => 'Password',
     'Name' => 'Name',
     'Confirm Password' => 'Confirm Password',
-    'Show' => 'Swow',
+    'Show' => 'Show',
     'Showing' => 'Showing',
     'to' => 'to',
     'of' => 'of',
@@ -54,4 +54,5 @@ return [
     'cta_join_now' => 'Join GeoSnaps',
 
     'post_idx' => 'All posts are here',
+    '404' => '404 | NOT FOUND',
 ];
