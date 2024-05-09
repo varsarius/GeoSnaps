@@ -8,14 +8,18 @@ use App\Http\Controllers\PostController;
 
 
 Route::get('/', function () {
+    if (\Illuminate\Support\Facades\Session::has('locale')) {
+        \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+    }
     return view('main');
 })->name('main');
 
 
 Route::get('locale/{locale}', function ($locale){
-    $_SESSION["locale"]=$locale;
+    //$_SESSION["locale"]=$locale;
 
-    \Illuminate\Support\Facades\App::setLocale($locale);
+    \Illuminate\Support\Facades\Session::put('locale', $locale);
+   // dd(\Illuminate\Support\Facades\App::currentLocale());
     return redirect()->back();
 })->name('locale');
 

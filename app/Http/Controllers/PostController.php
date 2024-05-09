@@ -19,6 +19,9 @@ class PostController extends Controller
      */
     public function index() : view
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $posts = Post::with('images')->paginate(30);
         return view('posts.index', compact('posts'));
     }
@@ -28,6 +31,9 @@ class PostController extends Controller
      */
     public function create() : view
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $posts = Post::with('images')->get();
         return view('posts.create', compact('posts'));
     }
@@ -37,6 +43,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         if (empty($_POST)) {
             return redirect()->back()->withErrors(['file_error' => 'Размер загружаемых файлов превышает допустимый лимит.']);
         }
@@ -70,6 +79,9 @@ class PostController extends Controller
      */
     public function show(Post $post) : view
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         return view('posts.show', compact('post'));
     }
 
@@ -78,6 +90,9 @@ class PostController extends Controller
      */
     public function edit(Post $post) : view
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         return view('posts.edit', compact('post'));
     }
 
@@ -86,6 +101,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post) : RedirectResponse
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $files = $request->file('images'); // получить все загруженные файлы
         if (isset($files)) {
 
@@ -120,7 +138,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('posts.index');//->with('success', 'Post updated successfully.');
+        return redirect()->back();//->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -128,18 +146,27 @@ class PostController extends Controller
      */
     public function destroy(Post $post) : RedirectResponse
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $post->delete();
         return redirect()->route('posts.index');//->with('success', 'Post deleted successfully');
     }
 
     public function destroy_image(Image $image) : RedirectResponse
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $image->delete();
         return redirect()->back();//->with('success', 'Post deleted successfully');
     }
 
     public function map($id = -1) : view
     {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
         $posts = Post::all();
         return view('map', compact('posts', 'id'));
     }

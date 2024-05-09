@@ -90,8 +90,7 @@
         }
     </script>
 <div>
-    <h1>The only way to do great work is to love what you do. - Steve Jobs </h1>
-    <h3>Edit a Post</h3>
+    <h3>{{ __('messages.Edit a Post') }}</h3>
         <div class="container mx-auto mt-4">
             <div class="row">
                 @foreach($post->images as $image)
@@ -126,15 +125,15 @@
         @csrf
         @method('PUT')
         <div class="mb-3 form-group">
-            <label class="form-label" for="name">Name</label>
+            <label class="form-label" for="name">{{ __('messages.Tittle') }}</label>
             <input type="text" class="form-control" id="name" name="name" required value="{{$post->name}}">
         </div>
         <div class="mb-3 form-group">
-            <label class="form-label" for="description">Description</label>
+            <label class="form-label" for="description">{{ __('messages.description') }}</label>
             <textarea id="description" class="form-control" name="description" rows="3" required>{{$post->description}}</textarea>
         </div>
         <div>
-            <label for="formFileLg" class="form-label">Large file input example</label>
+            <label for="formFileLg" class="form-label">{{ __('messages.Add some new images') }}</label>
             <input class="form-control form-control-lg" id="formFileLg" type="file" name="images[]" multiple="">
         </div>
         <br>
@@ -142,7 +141,7 @@
 
         <label class="form-check-label col-md-7" for="openMap">
             <div class="col-md-7 form-check form-switch {{ old('tt') ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="{{ old('tt') ? 'true' : 'false' }}" aria-controls="collapseExample">
-                <div>Показать на карте координаты</div>
+                <div>{{ __('messages.show coordinates on the map') }}</div>
                 <input class="form-check-input" type="checkbox" id="openMap" name="tt" {{ old('tt') ? 'checked' : '' }} />
             </div>
         </label>
@@ -156,7 +155,7 @@
         <input type="hidden" name="longitude" id="lng"/>
         <br>
         <br>
-        <button type="submit" class="btn btn-primary">Update Post</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.update Post') }}</button>
 
     </form>
 

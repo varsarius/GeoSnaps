@@ -123,15 +123,15 @@
     <form id="uploadForm" action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name the post"  value="{{ old('name') }}" required>
+            <label for="name" class="form-label">{{ __('messages.Tittle') }}</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.name the post') }}"  value="{{ old('name') }}" required>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">{{ __('messages.description') }}</label>
             <textarea id="description" class="form-control" name="description" rows="3"> {{ old('description') }} </textarea>
         </div>
         <div>
-            <label for="formFileLg" class="form-label">Large file input example</label>
+            <label for="formFileLg" class="form-label">{{ __('messages.Choose some images') }}</label>
             <input class="form-control form-control-lg" id="formFileLg" type="file" name="images[]" multiple="">
         </div>
         <br>
@@ -139,7 +139,7 @@
 
         <label class="form-check-label col-md-7" for="openMap">
         <div class="col-md-7 form-check form-switch {{ old('tt') ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="{{ old('tt') ? 'true' : 'false' }}" aria-controls="collapseExample">
-             <div>Показать на карте координаты</div>
+             <div>{{ __('messages.show coordinates on the map') }}</div>
             <input class="form-check-input" type="checkbox" id="openMap" name="tt" {{ old('tt') ? 'checked' : '' }} />
         </div>
         </label>
@@ -153,7 +153,7 @@
         <input type="hidden" name="longitude" id="lng"/>
         <br>
         <br>
-        <button type="submit" class="btn btn-primary">Create Post</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.Create Post') }}</button>
     </form>
     <br>
     <div id="fileList"></div>

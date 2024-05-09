@@ -9,13 +9,13 @@
 
     </style>
 <div>
-    <h1>The biggest battle is the war against ignorance. - Mustafa Kemal Atatürk </h1>
+    <h1>{{ __('messages.post_idx') }}</h1>
     <div class="container mx-auto mt-4">
         <div class="row">
             @foreach($posts as $post)
 
                 <div class="col-md-4" style="margin-bottom: 2rem">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 22rem;">
 
                         <div id="carouselExampleIndicators{{$post->id}}" class="carousel slide">
                             <div class="carousel-indicators">
@@ -68,7 +68,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;">{{ $post->description }}</pre></p>
-                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> Show</a>
+                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> {{ __('messages.Show') }}</a>
                         </div>
                     </div>
                 </div>

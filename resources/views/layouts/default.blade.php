@@ -25,11 +25,11 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{{ route('posts.index') }}" class="nav-link px-2 link-secondary">{{ __('messages.w') }}</a></li>
             @if (auth()->check())
-                <li><a href="{{ route('posts.create') }}" class="nav-link px-2 link-secondary">Опубликовать</a></li>
+                <li><a href="{{ route('posts.create') }}" class="nav-link px-2 link-secondary">{{ __('messages.Publish') }}</a></li>
             @endif
-            <li><a href="{{ route('map') }}" class="nav-link px-2 link-secondary">Карта</a></li>
+            <li><a href="{{ route('map') }}" class="nav-link px-2 link-secondary">{{ __('messages.map') }}</a></li>
             @if (auth()->check())
-                <li><a href="{{ route('home') }}" class="nav-link px-2 link-secondary">Личный кабинет</a></li>
+                <li><a href="{{ route('home') }}" class="nav-link px-2 link-secondary">{{ __('messages.Personal Area') }}</a></li>
             @endif
         </ul>
 
@@ -40,13 +40,13 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item col-md-6" style="margin-bottom: 1em">
-                            <a class="btn btn-outline-primary me-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="btn btn-outline-primary me-2" href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item col-md-6">
-                            <a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="btn btn-primary" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                         </li>
                     @endif
                 @else
@@ -59,7 +59,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('messages.Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <label class="form-check-label" for="lightSwitch"> Dark Mode
+        <label class="form-check-label" for="lightSwitch"> {{ __('messages.dark_mode') }}
             <div class="col-md-1 form-check form-switch">
                 <input onchange="aSwitchMode()" class="form-check-input" type="checkbox" id="lightSwitch" />
             </div>

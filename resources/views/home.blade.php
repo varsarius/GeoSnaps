@@ -9,13 +9,13 @@
 
     </style>
     <div>
-        <h1>Мои публикации </h1>
+        <h1>{{ __('messages.my_publications') }} </h1>
         <div class="container mx-auto mt-4">
             <div class="row">
                 @foreach($posts as $post)
 
                     <div class="col-md-4" style="margin-bottom: 2rem">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 22rem;">
 
                             <div id="carouselExampleIndicators{{$post->id}}" class="carousel slide">
                                 <div class="carousel-indicators">
@@ -68,12 +68,12 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;">{{ $post->description }}</pre></p>
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mr-2"><i class="fas fa-link"></i> Edit</a>
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> Show</a>
+                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mr-2"><i class="fas fa-link"></i> {{ __('messages.Edit') }}</a>
+                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary "><i class="fab fa-github"></i> {{ __('messages.Show') }}</a>
                                 <form style="float: right" action="{{ route('posts.destroy', $post->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">{{ __('messages.Delete') }}</button>
                                 </form>
                             </div>
                         </div>

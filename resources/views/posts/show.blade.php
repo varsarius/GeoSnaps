@@ -96,5 +96,6 @@
 
         <br>
         <div id="fileList"></div>
+        <button class="btn btn-primary" onclick="window.history.back()">❮{{ __('messages.go back') }}</button>
     </div>
 @endsection
