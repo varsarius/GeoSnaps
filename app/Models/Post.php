@@ -20,6 +20,7 @@ class Post extends Model
         'description',
         'latitude',
         'longitude',
+        'user_id'
     ];
 
     public function images()
@@ -27,5 +28,9 @@ class Post extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
 }

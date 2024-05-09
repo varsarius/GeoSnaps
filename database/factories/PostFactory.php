@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class PostFactory extends Factory
             'description' => fake()->text(),
             'latitude' => fake()->latitude,
             'longitude' => fake()->longitude,
+            'user_id' => User::get()->random()->id, // Создаем новый пост для каждого изображения
         ];
     }
 }

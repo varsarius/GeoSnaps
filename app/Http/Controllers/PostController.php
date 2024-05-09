@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -41,8 +42,9 @@ class PostController extends Controller
         }
 
 
-
-        $post = Post::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $post = Post::create($data);
 
 
         $files = $request->file('images'); // получить все загруженные файлы

@@ -26,12 +26,32 @@ class DatabaseSeeder extends Seeder
 
         //Post::factory()->has(Image::factory()->count(rand(1, 15)))->count(20)->create();
 
-        for ($i = 0; $i < 200; $i++) {
+        /*for ($i = 0; $i < 20; $i++) {
             $post = Post::factory()->create();
-            Image::factory(rand(1, 5))->create(['post_id' => $post->id]);
+            Image::factory(rand(1, 15))->create(['post_id' => $post->id]);
+        }*/
+
+        for ($i = 0; $i < 10; $i++) {
+            $user = User::factory()->create();
+            for ($j = 0; $j<7;$j++) {
+                $post = Post::factory()->create(['user_id' => $user->id]);
+                Image::factory(rand(1, 5))->create(['post_id' => $post->id]);
+            }
         }
 
 
+        /*
+         *
+         * for ($i = 0; $i < 10; $i++) {
+            $user = User::factory()->create();
+            for ($j = 0; $j<5;$j++){
+                $post = Post::factory(rand(1, 5))->create(['user_id' => $user->id]);
+                Image::factory(rand(1, 5))->create(['post_id' => $post->id]);
+            }
+
+        }
+         *
+         * */
 
         /*$posts = Post::factory(20)->create();
         $images = Image::factory(100)->create();
