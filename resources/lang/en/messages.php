@@ -55,4 +55,6 @@ return [
 
     'post_idx' => 'All posts are here',
     '404' => '404 | NOT FOUND',
+    'Search' => 'Search',
+    'search_view' => 'Thoose, that contain ',
 ];

@@ -6,9 +6,11 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+//use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 
 
@@ -169,5 +171,16 @@ class PostController extends Controller
         }
         $posts = Post::all();
         return view('map', compact('posts', 'id'));
+    }
+
+    public function filter(Request $request)
+    {
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
+        }
+        $search = $request->search;
+
+        $posts = Post::where('name', 'like', "%$search%")->with('images')->paginate(30);
+        return view('posts.index', compact('posts', 'search'));
     }
 }

@@ -10,7 +10,24 @@
     </style>
 <div>
     <h1>{{ __('messages.post_idx') }}</h1>
+    @if(isset($search))
+        {{ __('messages.search_view') }} &nbsp; {{ $search }}
+    @endif
     <div class="container mx-auto mt-4">
+        <div class="row">
+            <form class="form-group d-flex align-items-center" method="post" action="/postss/filterr/">
+                @csrf
+                <div class="input-group mb-3 flex-grow-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">-O</span>
+                    </div>
+                    <input type="text" name="search" class="form-control" aria-label="Amount (to the nearest dollar)" />
+                </div>
+                <button type="submit" class="btn btn-primary ml-3" style="height: 38px; margin-left: 3em; margin-top: -1em">{{ __('messages.Search') }}</button>
+            </form>
+        </div>
+
+
         <div class="row">
             @foreach($posts as $post)
 

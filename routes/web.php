@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-
+Route::post('/postss/filterr/', [PostController::class, 'filter'])->name('post.filter');
 
 
 Route::get('/', function () {
@@ -33,3 +33,5 @@ Route::resource('posts', PostController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

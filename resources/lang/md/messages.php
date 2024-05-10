@@ -55,4 +55,6 @@ return [
 
     'post_idx' => 'Toate posturi sunt aici',
     '404' => '404 | NU E GĂSIT',
+    'Search' => 'Căutare',
+    'search_view' => 'Acei, care au ',
 ];
