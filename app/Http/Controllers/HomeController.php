@@ -26,9 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (\Illuminate\Support\Facades\Session::has('locale')) {
-            \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
-        }
         if(Auth::user()->role == 'user'){
             $posts = Post::with('images')->where('user_id', Auth::id())->paginate(30);
         }

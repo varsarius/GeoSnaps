@@ -34,7 +34,7 @@
                         x: @if($post->id == $id) 100 @else 50 @endif,
                         y: @if($post->id == $id) 100 @else 50 @endif,
                         name: '{{ $post->name }}',
-                        description: '<pre style="white-space: pre-wrap;     display: -webkit-box; -webkit-line-clamp: 13; -webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">{{ $post->description }}</pre>',
+                        description: "<pre style=\"white-space: pre-wrap;     display: -webkit-box; -webkit-line-clamp: 13; -webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;\">{{ preg_replace('/\s+/', ' ', $post->description) }}</pre>",
                     },
                     @endif
                 @endforeach

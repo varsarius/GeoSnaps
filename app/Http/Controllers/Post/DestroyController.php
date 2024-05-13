@@ -9,9 +9,6 @@ use Illuminate\Http\RedirectResponse;
 
 class DestroyController extends Controller
 {
-    /**
-     * Remove the specified resource from storage.
-     */
     public function __invoke(Post $post) : RedirectResponse
     {
         $post->delete();

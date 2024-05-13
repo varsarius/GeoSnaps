@@ -58,4 +58,10 @@ return [
     'search_view' => 'Those containing',
     'to_view' => 'look',
 
+    'name_required' =>  'Tittle field is required',
+    'latitude_required' => 'Please provide location coordinates',
+    'images_required' => 'Please upload at least one image',
+    'images_image' => 'All uploaded files must be images',
+    'images_max' => 'Maximum file size - 900 MB',
+
 ];

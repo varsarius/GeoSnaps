@@ -12,6 +12,6 @@ class DestroyImageController extends Controller
     public function __invoke(Image $image) : RedirectResponse
     {
         $image->delete();
-        return redirect()->back();//->with('success', 'Post deleted successfully');
+        return redirect()->back();
     }
 }

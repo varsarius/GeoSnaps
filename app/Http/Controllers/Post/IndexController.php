@@ -8,9 +8,6 @@ use Illuminate\View\View;
 
 class IndexController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function __invoke() : view
     {
         $posts = Post::with('images')->paginate(30);

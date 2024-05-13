@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,8 +31,6 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        //dd(rand(3, 34));
-        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Admin',
@@ -46,8 +43,9 @@ class DatabaseSeeder extends Seeder
 
         // 1
         Post::factory()->create([
-            'name' => 'Bla bla bla',
-            'description' => 'BL BLALBLALLBALLBLAL',
+            'name' => 'Ночные фонари',
+            'description' => 'Тысяча огней горят, укрытые окнами от холодной и темной улицы, но только несколько из них излучают тепло и уют. Их становится все меньше и меньше
+На улиице светло - но также золодно и одиноко',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -62,8 +60,8 @@ class DatabaseSeeder extends Seeder
 
         // 2
         Post::factory()->create([
-            'name' => 'Bla bla bla 2',
-            'description' => 'BL BLALBLALLBALLBLAL 2',
+            'name' => 'Ночной город',
+            'description' => 'Город сияющий яркими красками, пока где-то в глубине болотного цвета, гниют люди, гадая каки же завтра будет день',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -78,8 +76,8 @@ class DatabaseSeeder extends Seeder
 
         // 3
         Post::factory()->create([
-            'name' => 'Bla bla bla 3',
-            'description' => 'BL BLALBLALLBALLBLAL 3',
+            'name' => 'Центр города',
+            'description' => 'Красиво правда же? И никто толком то и не спит',
             'latitude' => 47.04989417918211,
             'longitude' => 28.864171275100873,
             'user_id' => 1,
@@ -94,8 +92,8 @@ class DatabaseSeeder extends Seeder
 
         // 4
         Post::factory()->create([
-            'name' => 'Bla bla bla 4',
-            'description' => 'BL BLALBLALLBALLBLAL 4',
+            'name' => 'Обычный рабочий день',
+            'description' => 'Жаркая, желтая дымка постоянно подымается над хрущами, все куда-то спешат и день проходит незаметно',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -110,8 +108,8 @@ class DatabaseSeeder extends Seeder
 
         // 5
         Post::factory()->create([
-            'name' => 'Bla bla bla 5',
-            'description' => 'BL BLALBLALLBALLBLAL 5',
+            'name' => 'Здания',
+            'description' => 'Новое и старое во яву',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -126,8 +124,8 @@ class DatabaseSeeder extends Seeder
 
         // 6
         Post::factory()->create([
-            'name' => 'Bla bla bla 6',
-            'description' => 'BL BLALBLALLBALLBLAL 6',
+            'name' => 'Дороги',
+            'description' => 'То шассе, то буреломы, никак не привыкну к этому в нашем городе',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -142,8 +140,8 @@ class DatabaseSeeder extends Seeder
 
         // 7
         Post::factory()->create([
-            'name' => 'Bla bla bla 7',
-            'description' => 'BL BLALBLALLBALLBLAL 7',
+            'name' => 'Свет по среди темноты',
+            'description' => 'Это же место, где собираются все те - комго выбросило на берег? Это же то место где постоянно гуляют тени?',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -158,8 +156,8 @@ class DatabaseSeeder extends Seeder
 
         // 8
         Post::factory()->create([
-            'name' => 'Bla bla bla 8',
-            'description' => 'BL BLALBLALLBALLBLAL 8',
+            'name' => 'Что-то не так',
+            'description' => 'Эти фотографии мне напоминает что-то незнакомое, но одновременнои приятное и родное чувство - правда от этого мне лучше не становится. На уме только грустныые мысли',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -174,8 +172,8 @@ class DatabaseSeeder extends Seeder
 
         // 9
         Post::factory()->create([
-            'name' => 'Bla bla bla 9',
-            'description' => 'BL BLALBLALLBALLBLAL 9',
+            'name' => 'Облака',
+            'description' => 'Так и хочется потеряться в них и в этом божественном свете',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -190,8 +188,8 @@ class DatabaseSeeder extends Seeder
 
         // 10
         Post::factory()->create([
-            'name' => 'Bla bla bla 10',
-            'description' => 'BL BLALBLALLBALLBLAL 10',
+            'name' => 'Камни',
+            'description' => 'Просто камни, а вы что хотели еще увидеть тут?',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -206,8 +204,8 @@ class DatabaseSeeder extends Seeder
 
         // 11
         Post::factory()->create([
-            'name' => 'Bla bla bla 11',
-            'description' => 'BL BLALBLALLBALLBLAL 11',
+            'name' => 'Еше больше камней',
+            'description' => 'Но тут хотя бы постройки есть - и что-то отдаленно напоминающее рабочее производство',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -222,8 +220,8 @@ class DatabaseSeeder extends Seeder
 
         // 12
         Post::factory()->create([
-            'name' => 'Bla bla bla 12',
-            'description' => 'BL BLALBLALLBALLBLAL 12',
+            'name' => 'Меня снимают',
+            'description' => 'Уберите камеру - согласно закону, людей нельзя снимать без их согласия',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -238,8 +236,8 @@ class DatabaseSeeder extends Seeder
 
         // 13
         Post::factory()->create([
-            'name' => 'Bla bla bla 13',
-            'description' => 'BL BLALBLALLBALLBLAL 13',
+            'name' => 'Однажды после рабочего дня',
+            'description' => 'Прошолся я как-то по знакомым местам. Я никогда не замечал их такими. Тени выросли, и антураж стал совершено другим, более холодными чертовски знакомым мне. Антиутопчиный , ночной город начал преображаться во тьме',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,
@@ -254,8 +252,8 @@ class DatabaseSeeder extends Seeder
 
         // 14
         Post::factory()->create([
-            'name' => 'Bla bla bla 14',
-            'description' => 'BL BLALBLALLBALLBLAL 14',
+            'name' => 'Еще один фанарь',
+            'description' => 'Не знаю как, но еще раз осмотрелся назад, и понял что цикл повториться снова - смогу ли я выбраться из него? Если я поподу в такой же цикл. Зависит уже от меня самого.',
             'latitude' => $this->getRandomCoordinates()[0],
             'longitude' => $this->getRandomCoordinates()[1],
             'user_id' => 1,

@@ -57,4 +57,12 @@ return [
     'Search' => 'Căutare',
     'search_view' => 'Cele care conțin',
     'to_view' => 'vizualizează',
+
+    'name_required' =>  'Titlu este necesar',
+    'latitude_required' => 'Vă rugăm să furnizați coordonatele locației',
+    'images_required' => 'Vă rugăm să încărcați cel puțin o imagine',
+    'images_image' => 'Toate fișierele încărcate trebuie să fie imagini',
+    'images_max' => 'Dimensiunea maximă a fișierului - 900 MB',
+
+
 ];

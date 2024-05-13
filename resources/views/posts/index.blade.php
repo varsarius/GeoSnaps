@@ -15,7 +15,7 @@
     @endif
     <div class="container mx-auto mt-4">
         <div class="row">
-            <form class="form-group d-flex align-items-center" method="post" action="/postss/filterr/">
+            <form class="form-group d-flex align-items-center" method="get" action="/postss/filterr/">
                 @csrf
                 <div class="input-group mb-3 flex-grow-1">
                     <div class="input-group-prepend">

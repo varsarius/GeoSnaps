@@ -34,9 +34,9 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Заполните поле имени.',
-            'images.*.image' => 'Все загруженные файлы должны быть изображениями.',
-            'images.*.max' => 'Максимальный размер файлов - 900 МБ.',
+            'name.required' => __('messages.name_required'),
+            'images.*.image' => __('messages.images_image'),
+            'images.*.max' => __('messages.images_max'),
         ];
     }
 }

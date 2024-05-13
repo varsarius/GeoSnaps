@@ -9,9 +9,6 @@ use Illuminate\View\View;
 
 class CreateController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
     public function __invoke() : view
     {
         $posts = Post::with('images')->get();
