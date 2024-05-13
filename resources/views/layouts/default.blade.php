@@ -9,6 +9,11 @@
     <title>{{ config('app.name', 'GeoSnaps') }}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="GeoSnaps is a platform for sharing and discovering travel experiences through snapshots. Join our community to explore amazing destinations, share your adventures, and connect with fellow travelers.">
+    <meta name="keywords" content="GeoSnaps, travel, photography, explore, community, destinations, adventure, discover, social network, travel photography, travel community">
+    <meta name="author" content="UTM student">
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>--}}
