@@ -27,7 +27,7 @@ class UpdatePostRequest extends FormRequest
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'images' => 'nullable',
-            'images.*' => ['image', 'max:8192'],
+            'images.*' => ['image', 'max:950000'],
         ];
     }
 
@@ -36,7 +36,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'name.required' => 'Заполните поле имени.',
             'images.*.image' => 'Все загруженные файлы должны быть изображениями.',
-            'images.*.max' => 'Максимальный размер файла - 8 МБ.',
+            'images.*.max' => 'Максимальный размер файлов - 900 МБ.',
         ];
     }
 }

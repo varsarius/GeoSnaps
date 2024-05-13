@@ -27,7 +27,7 @@ class StorePostRequest extends FormRequest
             'latitude' => 'required',
             'longitude' => 'required',
             'images' => 'required',
-            'images.*' => ['image', 'max:8192'],
+            'images.*' => ['image', 'max:950000'],
         ];
     }
 
@@ -39,7 +39,7 @@ class StorePostRequest extends FormRequest
             'longitude.required' => '',
             'images.required' => 'Пожалуйста, загрузите хотя бы одно изображение.',
             'images.*.image' => 'Все загруженные файлы должны быть изображениями.',
-            'images.*.max' => 'Максимальный размер файла - 8 МБ.',
+            'images.*.max' => 'Максимальный размер файлов - 900 МБ.',
         ];
     }
 }
