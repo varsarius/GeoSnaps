@@ -24,6 +24,7 @@ Route::middleware([SetLocale::class])->group(function () {
         return view('main');
     })->name('main');
 
+    //Route::resource
     Route::get('/posts', IndexController::class)->name('posts.index');
     Route::get('/posts/create', CreateController::class)->name('posts.create');
     Route::post('/posts', StoreController::class)->name('posts.store');
@@ -41,6 +42,7 @@ Route::middleware([SetLocale::class])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    //Auth:route()
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login']);
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
