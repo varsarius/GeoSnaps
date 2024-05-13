@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+
 
 Route::post('/postss/filterr/', [PostController::class, 'filter'])->name('post.filter');
 

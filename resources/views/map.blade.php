@@ -33,6 +33,8 @@
                         imgUrl: '{{ asset($post->images->first()->image_url)}}',
                         x: @if($post->id == $id) 100 @else 50 @endif,
                         y: @if($post->id == $id) 100 @else 50 @endif,
+                        name: '{{ $post->name }}',
+                        description: '<pre style="white-space: pre-wrap;     display: -webkit-box; -webkit-line-clamp: 13; -webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">{{ $post->description }}</pre>',
                     },
                     @endif
                 @endforeach
@@ -40,7 +42,7 @@
 
             locations.forEach(function(location) {
                 var position = [location.lat, location.lng];
-                var marker = addMarker(position, location.link, location.imgUrl, location.x, location.y);
+                var marker = addMarker(position, location.link, location.imgUrl, location.x, location.y, location.name, location.description);
 
                 // Добавляем обработчик клика на маркер, чтобы открыть информационное окно при щелчке
                 //marker.events.add('click', function() {
@@ -81,13 +83,13 @@
         }
 
         // Функция для добавления маркера на карту
-        function addMarker(position, link, imgUrl, x, y) {
+        function addMarker(position, link, imgUrl, x, y, name, description) {
             var marker = new ymaps.Placemark(position, {
                 iconContent: '<img style="margin-left: '+(-0.4*x)+'px; margin-top: '+(-1.8*y)+'px" width="'+x+'" height="'+y+'" src="'+imgUrl+'" alt="?"/>', // Текст, который будет отображаться над маркером
-                balloonContentHeader: 'Интересное место',
-                balloonContentBody: 'Хочешь...',
-                balloonContentFooter: '<a href="'+link+'"> Посмотреть..? </a>',
-                hintContent: 'May the Force be with you!'
+                balloonContentHeader: name,
+                balloonContentBody: description,
+                balloonContentFooter: '<a href="'+link+'"> {{ __('messages.to_view') }} </a>',
+                hintContent: name
             });
 
             map.geoObjects.add(marker); // добавляем маркер на карту

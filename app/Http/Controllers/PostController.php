@@ -73,7 +73,7 @@ class PostController extends Controller
         }
 
 
-        return redirect()->route('posts.index');//->with('success', 'Post created successfully.');
+        return redirect()->route('home');//->with('success', 'Post created successfully.');
     }
 
     /**
@@ -152,7 +152,7 @@ class PostController extends Controller
             \Illuminate\Support\Facades\App::setLocale(\Session::get('locale'));
         }
         $post->delete();
-        return redirect()->route('posts.index');//->with('success', 'Post deleted successfully');
+        return redirect()->back();//->with('success', 'Post deleted successfully');
     }
 
     public function destroy_image(Image $image) : RedirectResponse

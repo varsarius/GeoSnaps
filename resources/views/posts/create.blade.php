@@ -138,13 +138,13 @@
         <br>
 
         <label class="form-check-label col-md-7" for="openMap">
-        <div class="col-md-7 form-check form-switch {{ old('tt') ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="{{ old('tt') ? 'true' : 'false' }}" aria-controls="collapseExample">
+        <div id="upper_map" class="col-md-7 form-check form-switch {{ old('tt') ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="{{ old('tt') ? 'true' : 'false' }}" aria-controls="collapseExample">
              <div>{{ __('messages.show coordinates on the map') }}</div>
             <input class="form-check-input" type="checkbox" id="openMap" name="tt" {{ old('tt') ? 'checked' : '' }} />
         </div>
         </label>
         <div class="collapse {{ old('tt') ? 'show' : '' }}" id="collapseExample">
-                <div class="card card-body" id="map" style="height: 40vh; width: 70vw;"></div>
+            <div class="card card-body" id="map" style="height: 40vh; width: 70vw;"></div>
         </div>
 
 
@@ -182,9 +182,16 @@
             if (this.checked === false) {
                 document.getElementById('lat').setAttribute('value', null);
                 document.getElementById('lng').setAttribute('value', null);
+
+                document.getElementById('upper_map').classList.add('collapsed');
+                document.getElementById('collapseExample').classList.remove('show');
+
             } else {
                 document.getElementById('lat').setAttribute('value', coords[0]);
                 document.getElementById('lng').setAttribute('value', coords[1]);
+
+                document.getElementById('upper_map').classList.remove('collapsed');
+                document.getElementById('collapseExample').classList.add('show');
             };
         });
     </script>
