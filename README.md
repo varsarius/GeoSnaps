@@ -12,7 +12,7 @@
 1. Склонируйте репозиторий с помощью git:
 
 ```bash
-git clone https://github.com/varsarius/GeoSnaps/tree/tunel
+git clone -b https://github.com/varsarius/geoSnaps/
 ```
 
 2. Перейдите в каталог проекта:
