@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
@@ -269,8 +270,10 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             $user = User::factory()->create();
             for ($j = 0; $j<7;$j++) {
+
                 $post = Post::factory()->create(['user_id' => $user->id]);
                 Image::factory(rand(1, 5))->create(['post_id' => $post->id]);
+                Comment::factory(rand(1,7))->create(['user_id' => $user->id, 'post_id' => $post->id]);
             }
         }
 

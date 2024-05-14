@@ -61,7 +61,7 @@
             return marker;
         }
     </script>
-    <div>
+    <div style="margin-bottom: 2em">
         <h1 class="card-title">{{$post->name}}</h1>
         <div class="container mx-auto mt-4">
             <div class="row">
@@ -97,5 +97,44 @@
         <br>
         <div id="fileList"></div>
         <button class="btn btn-primary" onclick="window.history.back()">❮{{ __('messages.go back') }}</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="margin-top: 5em">{{ __('messages.comments') }} ({{ $post->comments->count() }})</h2>
+
+            <!-- Секция с комментариями -->
+            <div class="comments-section">
+                @foreach($post->comments as $comment)
+                <div class="comment">
+                    <strong>{{$comment->user->name}}</strong> <span>{{$comment->dateAsCarbon->diffForHumans()}}</span>
+                    <p>{{$comment->message}}</p>
+                    @can('view', Auth::user())
+                        <form action="{{ route('posts.comments.destroy', $comment->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    @endcan
+                </div>
+                    <hr>
+                @endforeach
+            </div>
+
+
+
+            @auth
+            <!-- Форма для оставления комментария -->
+            <h3 style="margin-top: 5em">{{ __('messages.leave_momments_from_the_name') }} {{ Auth::user()->name }}</h3>
+            <form method="post" action=" {{ route('posts.comments.store', $post->id) }}">
+            @csrf
+                <div class="form-group">
+                    <label for="message">{{ __('messages.comment') }}:</label>
+                    <textarea class="form-control" name="message" id="message" rows="5" placeholder="{{ __('messages.input_your_comment') }}" required></textarea>
+                </div>
+                <button style="margin-top: 2em" type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
+            </form>
+            @endauth
+        </div>
     </div>
 @endsection

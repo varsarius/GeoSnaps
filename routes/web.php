@@ -28,7 +28,13 @@ Route::middleware([SetLocale::class])->group(function () {
     Route::get('/posts', IndexController::class)->name('posts.index');
     Route::get('/posts/create', CreateController::class)->name('posts.create');
     Route::post('/posts', StoreController::class)->name('posts.store');
+
+
     Route::get('/posts/{post}', ShowController::class)->name('posts.show');
+    Route::post('/posts/{post}/comments', App\Http\Controllers\Comment\StoreController::class)->name('posts.comments.store');
+    Route::DELETE('/posts/{comment}', App\Http\Controllers\Comment\DestroyController::class)->name('posts.comments.destroy');
+
+
     Route::get('/posts/{post}/edit', EditController::class)->name('posts.edit');
     Route::PUT('/posts/{post}', UpdateController::class)->name('posts.update');
     Route::DELETE('/posts/{post}', DestroyController::class)->name('posts.destroy');

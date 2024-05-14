@@ -64,4 +64,9 @@ return [
     'images_image' => 'All uploaded files must be images',
     'images_max' => 'Maximum file size - 900 MB',
 
+    'comments' => 'Comments',
+    'leave_momments_from_the_name' => 'Leave a comment from the name',
+    'comment' => 'Comment',
+    'input_your_comment' => 'Enter your comment',
+    'submit' => 'Submit',
 ];

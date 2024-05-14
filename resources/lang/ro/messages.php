@@ -64,5 +64,9 @@ return [
     'images_image' => 'Toate fișierele încărcate trebuie să fie imagini',
     'images_max' => 'Dimensiunea maximă a fișierului - 900 MB',
 
-
+    'comments' => 'Comentarii',
+    'leave_momments_from_the_name' => 'Lăsați un comentariu în numele',
+    'comment' => 'Comentariu',
+    'input_your_comment' => 'Introduceți-vă comentariul',
+    'submit' => 'Trimite',
 ];
