@@ -185,8 +185,8 @@
 
         document.getElementById('openMap').addEventListener('change', function(e) {
             if (this.checked === false) {
-                document.getElementById('lat').setAttribute('value', null);
-                document.getElementById('lng').setAttribute('value', null);
+                document.getElementById('lat').setAttribute('value', '');
+                document.getElementById('lng').setAttribute('value', '');
 
                 document.getElementById('upper_map').classList.add('collapsed');
                 document.getElementById('collapseExample').classList.remove('show');
