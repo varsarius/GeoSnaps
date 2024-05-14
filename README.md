@@ -58,8 +58,8 @@ npm run dev
 Увеличьте размер файлов, которые можно загружать через формы, и увеличьте лимиты POST-запросов в вашем файле `php.ini`:
 
 ```ini
-upload_max_filesize = 64M
-post_max_size = 64M
+upload_max_filesize = 1000M
+post_max_size = 1000M
 ```
 
 ## Запуск сервера
